@@ -18,9 +18,9 @@ public class ProjectDTO {
     private String projectUrl;
     private String githubUrl;
     private String imageUrl;
-    private String status;   // ✅ ADD THIS
+    private String status;
+    private Long likes;   // ✅ ADD THIS
 }
-
 
 
 
