@@ -19,11 +19,6 @@ public class ProjectDTO {
     private String githubUrl;
     private String imageUrl;
     private String status;
-    private Long likes;   // ✅ ADD THIS
+    private Long likes;
+    private Long commentCount;   // ✅ ADD THIS
 }
-
-
-
-
-
-
