@@ -23,4 +23,5 @@ public class ProjectDTO {
     private Long likes;
     private Long commentCount;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
