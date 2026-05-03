@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectDTO {
+
     private Long id;
     private String title;
     private String description;
@@ -17,4 +18,12 @@ public class ProjectDTO {
     private String projectUrl;
     private String githubUrl;
     private String imageUrl;
+    private String status;   // ✅ ADD THIS
 }
+
+
+
+
+
+
+
