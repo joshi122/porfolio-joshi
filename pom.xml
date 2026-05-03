@@ -7,7 +7,7 @@
 
     <groupId>com.devops</groupId>
     <artifactId>portfolio-tracker</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>DevOps Portfolio Tracker</name>
@@ -188,5 +188,18 @@
             </plugin>
         </plugins>
     </build>
+             <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <url>http://52.66.28.219:8081/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <url>http://52.66.28.219:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
 
 </project>
