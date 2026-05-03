@@ -1,5 +1,6 @@
 package com.devops.portfolio.service;
 
+import com.devops.portfolio.PortfolioTrackerApplication;
 import com.devops.portfolio.entity.User;
 import com.devops.portfolio.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = PortfolioTrackerApplication.class)
 public class UserServiceTests {
 
     @Autowired
