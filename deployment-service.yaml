@@ -14,9 +14,9 @@ spec:
         app: portfolio-tracker
     spec:
       tolerations:
-        - key: "eks-auto-mode/compute"
-          operator: "Exists"
-          effect: "NoSchedule"
+  - key: "CriticalAddonsOnly"
+    operator: "Exists"
+    effect: "NoSchedule"
       containers:
         - name: portfolio-tracker
           image: joshi122/portfolio:latest
