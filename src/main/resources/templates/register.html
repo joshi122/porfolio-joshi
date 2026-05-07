@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register – Portfolio Tracker</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a; color: #e2e8f0;
+            min-height: 100vh; display: flex;
+            align-items: center; justify-content: center;
+        }
+        .card {
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 12px; padding: 40px;
+            width: 100%; max-width: 420px;
+        }
+        h1 { font-size: 1.8rem; margin-bottom: 8px; color: #f1f5f9; }
+        p.sub { color: #94a3b8; margin-bottom: 24px; font-size: 0.9rem; }
+        .alert-error { background: #450a0a; color: #fca5a5; border: 1px solid #7f1d1d; padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #94a3b8; }
+        input {
+            width: 100%; padding: 10px 14px;
+            background: #0f172a; border: 1px solid #334155;
+            border-radius: 8px; color: #f1f5f9; font-size: 0.95rem; margin-bottom: 16px;
+        }
+        input:focus { outline: none; border-color: #6366f1; }
+        button {
+            width: 100%; padding: 12px; background: #6366f1;
+            color: white; border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+        }
+        button:hover { background: #4f46e5; }
+        .footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #64748b; }
+        .footer a { color: #6366f1; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Create Account</h1>
+    <p class="sub">Join Portfolio Tracker today</p>
+
+    <div th:if="${error}" class="alert-error" th:text="${error}"></div>
+
+    <form th:action="@{/auth/register}" method="post">
+        <label>Full Name</label>
+        <input type="text" name="fullName" placeholder="John Doe" required/>
+
+        <label>Username</label>
+        <input type="text" name="username" placeholder="johndoe" required/>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="john@example.com" required/>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Min 6 characters" required/>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    <div class="footer">
+        Already have an account? <a th:href="@{/auth/login}">Sign in</a>
+    </div>
+</div>
+</body>
+</html>

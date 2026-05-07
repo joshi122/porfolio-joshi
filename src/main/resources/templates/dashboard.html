@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Dashboard – Portfolio Tracker</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; }
+        nav {
+            background: #1e293b; border-bottom: 1px solid #334155;
+            padding: 16px 32px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        nav .logo { font-size: 1.2rem; font-weight: 700; color: #6366f1; }
+        nav .actions { display: flex; gap: 12px; align-items: center; }
+        .btn {
+            padding: 8px 16px; border-radius: 8px; font-size: 0.85rem;
+            font-weight: 600; cursor: pointer; text-decoration: none; border: none;
+        }
+        .btn-primary { background: #6366f1; color: white; }
+        .btn-danger { background: #dc2626; color: white; }
+        .btn-outline { background: transparent; color: #94a3b8; border: 1px solid #334155; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+        .welcome { margin-bottom: 32px; }
+        .welcome h2 { font-size: 1.6rem; color: #f1f5f9; }
+        .welcome p { color: #94a3b8; margin-top: 4px; }
+        .section-title {
+            font-size: 1.1rem; font-weight: 600; color: #f1f5f9;
+            margin-bottom: 16px; padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+        .card {
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 10px; padding: 20px;
+        }
+        .card h3 { font-size: 1rem; color: #f1f5f9; margin-bottom: 8px; }
+        .card p { font-size: 0.85rem; color: #94a3b8; margin-bottom: 12px; line-height: 1.5; }
+        .tag {
+            display: inline-block; padding: 3px 8px;
+            background: #1e3a5f; color: #93c5fd;
+            border-radius: 4px; font-size: 0.75rem; margin-right: 4px; margin-bottom: 4px;
+        }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+        .likes { font-size: 0.8rem; color: #64748b; }
+        .empty { color: #64748b; font-size: 0.9rem; padding: 20px 0; }
+        form.inline { display: inline; }
+    </style>
+</head>
+<body>
+<nav>
+    <span class="logo">📁 Portfolio Tracker</span>
+    <div class="actions">
+        <span style="color:#94a3b8; font-size:0.9rem">Hello, <strong th:text="${user.fullName ?: user.username}"></strong></span>
+        <a th:href="@{/projects/new}" class="btn btn-primary">+ New Project</a>
+        <form th:action="@{/auth/logout}" method="post" class="inline">
+            <button type="submit" class="btn btn-outline">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="welcome">
+        <h2>My Projects</h2>
+        <p>Manage and showcase your work</p>
+    </div>
+
+    <div class="section-title">Your Projects</div>
+    <div class="grid" th:if="${projects.content.size() > 0}">
+        <div class="card" th:each="project : ${projects.content}">
+            <h3 th:text="${project.title}">Project Title</h3>
+            <p th:text="${project.description}">Description</p>
+            <div>
+                <span class="tag" th:each="tech : ${#strings.arraySplit(project.technologies, ',')}" th:text="${#strings.trim(tech)}"></span>
+            </div>
+            <div class="card-footer">
+                <span class="likes">❤️ <span th:text="${project.likes}">0</span> likes</span>
+                <form th:action="@{/projects/{id}/delete(id=${project.id})}" method="post" class="inline">
+                    <button type="submit" class="btn btn-danger" style="padding:4px 10px; font-size:0.8rem">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <p class="empty" th:if="${projects.content.size() == 0}">No projects yet. Click "+ New Project" to add one!</p>
+
+    <div class="section-title">All Community Projects</div>
+    <div class="grid" th:if="${allProjects.content.size() > 0}">
+        <div class="card" th:each="project : ${allProjects.content}">
+            <h3 th:text="${project.title}">Project Title</h3>
+            <p th:text="${project.description}">Description</p>
+            <div>
+                <span class="tag" th:each="tech : ${#strings.arraySplit(project.technologies, ',')}" th:text="${#strings.trim(tech)}"></span>
+            </div>
+            <div class="card-footer">
+                <span class="likes">❤️ <span th:text="${project.likes}">0</span> likes</span>
+                <span style="font-size:0.8rem; color:#64748b" th:text="${project.owner.username}"></span>
+            </div>
+        </div>
+    </div>
+    <p class="empty" th:if="${allProjects.content.size() == 0}">No community projects yet.</p>
+</div>
+</body>
+</html>
